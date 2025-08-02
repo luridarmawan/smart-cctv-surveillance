@@ -563,6 +563,12 @@ body {
     font-size: 0.9rem;
 }
 
+#stream-note {
+    margin-top: 5px;
+    color: #666;
+    font-size: 0.8rem;
+}
+
 .stream-container {
     flex: 1;
     background: #000;

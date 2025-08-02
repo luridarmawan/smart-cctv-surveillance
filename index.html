@@ -139,7 +139,7 @@
             <div class="modal-body">
                 <div id="streamInfo" class="stream-info">
                     <p><strong>Location:</strong> <span id="streamLocation"></span></p>
-                    <p><strong>Stream Type:</strong> <span id="streamType"></span></p>
+                    <p class="hidden"><strong>Stream Type:</strong> <span id="streamType"></span></p>
                 </div>
                 <div id="streamContainer" class="stream-container">
                     <div class="stream-loading">Loading stream...</div>
@@ -149,6 +149,7 @@
                     <button class="video-control-btn" onclick="cctvMap.controlVideo('pause')">⏸️ Pause</button>
                     <button class="video-control-btn" onclick="cctvMap.controlVideo('reload')">🔄 Reload</button>
                 </div>
+                <div id="stream-note"></div>
                 <div id="streamError" class="stream-error" style="display: none;">
                     Failed to load stream. The camera might be offline or the URL is not accessible.
                 </div>

@@ -506,11 +506,13 @@ class CCTVMap {
         const streamContainer = document.getElementById('streamContainer');
         const streamError = document.getElementById('streamError');
         const videoControls = document.getElementById('videoControls');
+        const streamNote= document.getElementById('stream-note');
 
         // Set modal content
         modalTitle.textContent = cctv.name;
         streamLocation.textContent = cctv.location.address;
         streamType.textContent = cctv.type.toUpperCase();
+        streamNote.textContent = cctv.note;
 
         // Reset container
         streamContainer.innerHTML = '<div class="stream-loading">Loading stream...</div>';
