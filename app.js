@@ -10,7 +10,8 @@ class CCTVMap {
         // Map Center coordinates
         // this.mapCenter = [-6.2088, 106.8456]; // Jakarta
         this.mapCenter = [-7.4713042322058705, 110.92159402348967]; // Jawa Tengah
-        this.mapCenterZoom = 7;
+        this.mapCenter = [-1.4134430971549556, 117.76734201392946]; // Indonesia
+        this.mapCenterZoom = 5;
 
         this.init();
     }
@@ -225,7 +226,7 @@ class CCTVMap {
 
             // Create custom camera icon based on status
             const iconColor = cctv.status === 'active' ? '#28a745' : '#dc3545';
-            console.log(cctv.name, cctv.status, iconColor);
+            // console.log(cctv.name, cctv.status, iconColor);
             const icon = L.divIcon({
                 className: 'custom-div-icon',
                 html: `<div style="background-color: ${iconColor}; width: 30px; height: 25px; border-radius: 4px; border: 2px solid white; box-shadow: 0 2px 10px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; font-size: 14px; color: white;">📹</div>`,
