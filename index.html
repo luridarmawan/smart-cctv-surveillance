@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart CCTV Surveillance - Powered by AI</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Real-time CCTV monitoring system for traffic cameras across Indonesia. Monitor live streams from multiple camera locations with interactive map interface.">
+    <meta name="keywords" content="CCTV, monitoring, traffic, cameras, Indonesia, live stream, surveillance, real-time">
+    <meta name="author" content="CCTV Monitoring System">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph Meta Tags for Social Media -->
+    <meta property="og:title" content="Smart CCTV Surveillance - Real-time Traffic Monitoring Powered by AI">
+    <meta property="og:description" content="Monitor live traffic cameras across Indonesia with our interactive CCTV monitoring system. View real-time streams from multiple locations with fullscreen support.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://cctv.carik.id">
+    <meta property="og:image" content="https://cctv.carik.id/logo.png">
+    <meta property="og:image:alt" content="CCTV Monitoring System Interface showing map with camera locations">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="CCTV Monitoring System">
+    <meta property="og:locale" content="id_ID">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Smart CCTV Surveillance - Real-time Traffic Monitoring Powered by AI">
+    <meta name="twitter:description" content="Monitor live traffic cameras across Indonesia with interactive map interface and fullscreen streaming support.">
+    <meta name="twitter:image" content="https://cctv.carik.id/logo.png">
+    <meta name="twitter:image:alt" content="CCTV Monitoring System Interface">
+    <meta name="twitter:site" content="@your_twitter_handle">
+    <meta name="twitter:creator" content="@your_twitter_handle">
+
+    <!-- Additional Meta Tags -->
+    <meta name="theme-color" content="#1e3a8a">
+    <meta name="msapplication-TileColor" content="#1e3a8a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="CCTV Monitor">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin=""/>
+
+    <!-- Leaflet MarkerCluster CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/styles/styles.css">
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <a href="/" class="logo-link" title="Smart CCTV Surveillance">
+                <img src="./logo.png" alt="Logo" class="header-logo">
+            </a>
+            <div class="header-text">
+                <h1>Smart CCTV Surveillance</h1>
+                <p>See Everything. Instantly. Intelligently. Powered By AI</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="sidebar">
+            <div id="location-text" class="sidebar-header">
+                <span class="locations-label">📹 Locations:</span>
+                <input type="text" id="city-filter" class="city-filter-input" placeholder="Filter by city..." />
+            </div>
+            <ul class="camera-list" id="camera-list">
+                <!-- Camera list will be populated by JavaScript -->
+            </ul>
+        </div>
+
+        <div class="map-container">
+            <div id="loading" class="loading">
+                <div class="spinner"></div>
+                <span>Loading CCTV data...</span>
+            </div>
+
+            <div class="stats" id="stats" style="display: none;">
+                <div class="stats-item">
+                    <span class="stats-label">Total CCTV:</span>
+                    <span class="stats-value" id="total-cctv">0</span>
+                </div>
+                <div class="stats-item">
+                    <span class="stats-label">Active:</span>
+                    <span class="stats-value" id="active-cctv">0</span>
+                </div>
+                <div class="stats-item">
+                    <span class="stats-label">Inactive:</span>
+                    <span class="stats-value" id="inactive-cctv">0</span>
+                </div>
+            </div>
+
+            <div id="map"></div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="copyright">
+                <p>&copy; 2025 Smart CCTV Surveillance. All Rights Reserved.</p>
+            </div>
+            <div class="nav">
+                <a href="/">Add Your CCTV</a> |
+                <a href="https://github.com/luridarmawan/smart-cctv-surveillance">Github</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Stream Modal -->
+    <div id="streamModal" class="stream-modal">
+        <div id="modalContent" class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle" class="modal-title">Live Stream</h3>
+                <div class="modal-controls">
+                    <button id="fullscreenBtn" class="modal-btn" title="Toggle Fullscreen">
+                        🔳 Fullscreen
+                    </button>
+                    <button id="closeModalBtn" class="modal-btn close-btn" title="Close">
+                        ❗️ Report
+                    </button>
+                    <button id="closeModalBtn" class="modal-btn close-btn hidden" title="Close">
+                        ✕
+                    </button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div id="streamInfo" class="stream-info">
+                    <p><strong>Location:</strong> <span id="streamLocation"></span></p>
+                    <p><strong>Stream Type:</strong> <span id="streamType"></span></p>
+                </div>
+                <div id="streamContainer" class="stream-container">
+                    <div class="stream-loading">Loading stream...</div>
+                </div>
+                <div id="videoControls" class="video-controls">
+                    <button class="video-control-btn" onclick="cctvMap.controlVideo('play')">▶️ Play</button>
+                    <button class="video-control-btn" onclick="cctvMap.controlVideo('pause')">⏸️ Pause</button>
+                    <button class="video-control-btn" onclick="cctvMap.controlVideo('reload')">🔄 Reload</button>
+                </div>
+                <div id="streamError" class="stream-error" style="display: none;">
+                    Failed to load stream. The camera might be offline or the URL is not accessible.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""></script>
+
+    <!-- Leaflet MarkerCluster JavaScript -->
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script src="app.js?202507271754"></script>
+</body>
+</html>
