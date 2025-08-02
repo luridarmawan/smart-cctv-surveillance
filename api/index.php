@@ -5,7 +5,7 @@ require_once "config.php";
 
 // Cache configuration
 const CACHE_FILE = __DIR__ . '/cache/cctv_data.json';
-const CACHE_DURATION = 300; // 5 minutes in seconds
+const CACHE_DURATION = 60*60; // 1 hour
 $isForce = (@$_GET['force'] == true);
 
 // Function definitions first
@@ -45,7 +45,7 @@ function transformCCTVData(array $cctv): array {
             'latitude' => $lat,
             'longitude' => $lon,
             'address' => $cctv['Alamat Lengkap'] ?? '',
-            'city' => strtoupper($cctv['Kota'])
+            'city' => strtoupper($cctv['Kota/Area/Wilayah'])
         ]
     ];
 
