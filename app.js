@@ -225,11 +225,12 @@ class CCTVMap {
             }
 
             // Create custom camera icon based on status
-            const iconColor = cctv.status === 'active' ? '#28a745' : '#dc3545';
+            // a8ff90 08651eff
+            const iconColor = cctv.status === 'active' ? '#a8ff90' : '#dc3545';
             // console.log(cctv.name, cctv.status, iconColor);
             const icon = L.divIcon({
                 className: 'custom-div-icon',
-                html: `<div style="background-color: ${iconColor}; width: 30px; height: 25px; border-radius: 4px; border: 2px solid white; box-shadow: 0 2px 10px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; font-size: 14px; color: white;">📹</div>`,
+                html: `<div style="background-color: ${iconColor}; width: 30px; height: 25px; border-radius: 10px; border: 2px solid #08651eff; box-shadow: 0 2px 10px rgba(235, 255, 82, 0.3); display: flex; align-items: center; justify-content: center; font-size: 14px; color: yellow;">📹</div>`,
                 iconSize: [30, 25],
                 iconAnchor: [15, 12]
             });
