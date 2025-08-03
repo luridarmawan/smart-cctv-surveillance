@@ -1,4 +1,7 @@
-// Jakarta CCTV Map Application
+// Smart CCTV Surveillance
+
+const ISSUE_URL = "https://github.com/luridarmawan/smart-cctv-surveillance/issues/new?title=";
+
 class CCTVMap {
     constructor() {
         this.map = null;
@@ -531,7 +534,9 @@ class CCTVMap {
         const modal = document.getElementById('streamModal');
         const closeBtn = document.getElementById('closeModalBtn');
         const fullscreenBtn = document.getElementById('fullscreenBtn');
+        const reportBtn = document.getElementById('reportBtn');
         const modalContent = document.getElementById('modalContent');
+        const cctvName = document.getElementById('modalTitle');
 
         // Close modal event
         closeBtn.onclick = () => {
@@ -548,6 +553,11 @@ class CCTVMap {
         // Fullscreen toggle event
         fullscreenBtn.onclick = () => {
             this.toggleFullscreen();
+        };
+
+        reportBtn.onclick = () => {
+            let url = ISSUE_URL + cctvName.textContent;
+            window.open(url, '_blank');
         };
 
         // ESC key to close modal
